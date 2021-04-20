@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/listFragment">
+
+    <fragment
+        android:id="@+id/listFragment"
+        android:name="dev.challenge.themovies.presenatation.fragments.ListFragment"
+        android:label="ListFragment">
+        <action
+            android:id="@+id/to_singleFragment"
+            app:destination="@id/singleFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/singleFragment"
+        android:name="dev.challenge.themovies.presenatation.fragments.SingleFragment"
+        android:label="SingleFragment">
+
+        <argument
+            android:name="movie"
+            app:argType="dev.challenge.themovies.model.Movie"
+            app:nullable="false" />
+    </fragment>
+</navigation>
