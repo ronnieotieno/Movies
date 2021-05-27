@@ -64,26 +64,20 @@ object AppModule {
         )
     }
 
-    private val authInterceptor = object : Interceptor {
-        @Throws(IOException::class)
-        override fun intercept(chain: Interceptor.Chain): Response {
-            val newRequest: Request = chain.request().newBuilder()
-                .addHeader("Authorization", "Bearer ${BuildConfig.ACCESS_TOKEN}")
-                .build()
-            return chain.proceed(newRequest)
-        }
+    private val authInterceptor = Interceptor { chain ->
+        val newRequest: Request = chain.request().newBuilder()
+            .addHeader("Authorization", "Bearer ${BuildConfig.ACCESS_TOKEN}")
+            .build()
+        chain.proceed(newRequest)
     }
 
-    private val cacheInterceptor = object : Interceptor {
-        @Throws(IOException::class)
-        override fun intercept(chain: Interceptor.Chain): Response {
-            val response: Response = chain.proceed(chain.request())
-            val cacheControl = CacheControl.Builder()
-                .maxAge(30, TimeUnit.DAYS)
-                .build()
-            return response.newBuilder()
-                .header("Cache-Control", cacheControl.toString())
-                .build()
-        }
+    private val cacheInterceptor = Interceptor { chain ->
+        val response: Response = chain.proceed(chain.request())
+        val cacheControl = CacheControl.Builder()
+            .maxAge(30, TimeUnit.DAYS)
+            .build()
+        response.newBuilder()
+            .header("Cache-Control", cacheControl.toString())
+            .build()
     }
 }

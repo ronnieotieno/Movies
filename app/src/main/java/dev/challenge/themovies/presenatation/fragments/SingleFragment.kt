@@ -34,7 +34,7 @@ class SingleFragment : Fragment(R.layout.fragment_single) {
             binding.root.findNavController().navigateUp()
         }
 
-        val movie = arguments?.let { SingleFragmentArgs.fromBundle(it) }?.movie
+        val movie = arguments?.let { bundle -> SingleFragmentArgs.fromBundle(bundle) }?.movie
 
         binding.data = movie
 

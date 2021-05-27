@@ -1,4 +1,4 @@
-package dev.challenge.themovies
+package dev.challenge.themovies.presenatation.adapters
 
 import android.widget.ImageView
 import androidx.databinding.BindingAdapter
